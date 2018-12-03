@@ -3,7 +3,7 @@ import datetime
 import time
 from telegram.ext import Updater
 from telegram.ext import CommandHandler
-from bs4 import BeautifulSoup;
+from bs4 import BeautifulSoup
 import logging
 
 page = requests.get("https://attila-teufen.weebly.com/")
