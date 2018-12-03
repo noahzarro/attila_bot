@@ -75,7 +75,8 @@ subscribers.close()
 print("fagit")
 
 # create Bot
-updater = Updater(token='542559791:AAGNLeMRv5qo0zSIpJ8aVUGEtl7-bN5KM5M')
+TOKEN = '542559791:AAGNLeMRv5qo0zSIpJ8aVUGEtl7-bN5KM5M'
+updater = Updater(token=TOKEN)
 dispatcher = updater.dispatcher
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 
@@ -116,6 +117,7 @@ if telegramBot != 0:
         else:
             telegramBot.send_message(chat_id=chat_id, text="Die Webseite ist aktuell, gratuliere")
 
+PORT = os.environ.get('PORT')
 updater.start_webhook(listen="0.0.0.0", port=int(PORT), url_path=TOKEN)
-updater.bot.setWebhook("https://{}.herokuapp.com/{}".format('attilabot', "542559791:AAGNLeMRv5qo0zSIpJ8aVUGEtl7-bN5KM5M"))
+updater.bot.setWebhook("https://{}.herokuapp.com/{}".format('attilabot', TOKEN))
 updater.idle()
