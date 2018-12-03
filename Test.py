@@ -56,8 +56,8 @@ if datetime.datetime(year,month,day) >= now:
 
 # check day of the week
 
-if now.weekday()<3 or now.weekday()==6:
-    exit(0)
+#if now.weekday()<3 or now.weekday()==6:
+    #exit(0)
 
 # Bot Stuff
 
@@ -70,6 +70,8 @@ for line in subscribers:
     chat_ids.add(int(line))
 
 subscribers.close()
+
+print("fagit")
 
 # create Bot
 updater = Updater(token='542559791:AAGNLeMRv5qo0zSIpJ8aVUGEtl7-bN5KM5M')
