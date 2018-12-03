@@ -5,6 +5,7 @@ from telegram.ext import Updater
 from telegram.ext import CommandHandler
 from bs4 import BeautifulSoup
 import logging
+import os
 
 page = requests.get("https://attila-teufen.weebly.com/")
 print("Website loaded with code: " + str(page.status_code))
@@ -114,4 +115,7 @@ if telegramBot != 0:
             telegramBot.send_message(chat_id=chat_id, text="Die Webseite ist noch nicht aktuell, bitte aktualisieren")
         else:
             telegramBot.send_message(chat_id=chat_id, text="Die Webseite ist aktuell, gratuliere")
-updater.stop()
+
+updater.start_webhook(listen="0.0.0.0", port=int(PORT), url_path=TOKEN)
+updater.bot.setWebhook("https://{}.herokuapp.com/{}".format('attilabot', "542559791:AAGNLeMRv5qo0zSIpJ8aVUGEtl7-bN5KM5M"))
+updater.idle()
