@@ -112,12 +112,9 @@ time.sleep(5)
 
 if telegramBot != 0:
     for chat_id in chat_ids:
+        print("message sent to: " + str(chat_id))
         if correct==0:
+
             telegramBot.send_message(chat_id=chat_id, text="Die Webseite ist noch nicht aktuell, bitte aktualisieren")
         else:
             telegramBot.send_message(chat_id=chat_id, text="Die Webseite ist aktuell, gratuliere")
-
-PORT = os.environ.get('PORT')
-updater.start_webhook(listen="0.0.0.0", port=int(PORT), url_path=TOKEN)
-updater.bot.setWebhook("https://{}.herokuapp.com/{}".format('attilabot', TOKEN))
-updater.idle()
