@@ -60,7 +60,7 @@ telegramBot = 0
 chat_ids = set()
 
 # load chats
-subscribers = open("subscribers.txt", "r")
+subscribers = open("subscribers.local_data", "r")
 for line in subscribers:
     chat_ids.add(int(line))
 
@@ -77,7 +77,7 @@ def start(bot, update):
     bot.send_message(chat_id=update.message.chat_id, text="Bot aktiviert, du bist auf der Verteilerliste")
     print(str(update.message.chat_id) + " joined")
     chat_ids.add(update.message.chat_id)
-    subscribers_write = open("subscribers.txt", "w")
+    subscribers_write = open("subscribers.local_data", "w")
     for id in chat_ids:
         subscribers_write.write(str(id))
     subscribers_write.close()
@@ -86,7 +86,7 @@ def start(bot, update):
 def end(bot, update):
     bot.send_message(chat_id=update.message.chat_id, text="Bot deaktivert, du bist nicht mehr auf der Verteilerliste")
     chat_ids.remove(update.message.chat_id)
-    subscribers_write = open("subscribers.txt", "w")
+    subscribers_write = open("subscribers.local_data", "w")
     for id in chat_ids:
         subscribers_write.write(str(id))
     subscribers_write.close()
