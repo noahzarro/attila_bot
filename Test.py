@@ -114,8 +114,9 @@ while 1:
     while time_to_wake_up < now:
         time_to_wake_up = time_to_wake_up + datetime.timedelta(7)
 
+    print("go to sleep for: " + str((time_to_wake_up - now).total_seconds()) + " seconds")
     time.sleep((time_to_wake_up-now).total_seconds())
-    print("go to sleep for: " + str((time_to_wake_up-now).total_seconds()) +" seconds")
+
     correct = parse_website()
 
     if telegramBot != 0:
