@@ -75,6 +75,7 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 
 def start(bot, update):
     bot.send_message(chat_id=update.message.chat_id, text="Bot aktiviert, du bist auf der Verteilerliste")
+    print(str(update.message.chat_id) + " joined")
     chat_ids.add(update.message.chat_id)
     subscribers_write = open("subscribers.txt", "w")
     for id in chat_ids:
@@ -104,17 +105,17 @@ time.sleep(5)
 
 # wake it up every day_to_wake_up at 20:00
 
-day_to_wake_up = 3  # thursday
+time_to_wake_up = datetime.datetime(2018, 12, 6, 20, 0, 0)  # thursday
 
 while 1:
 
     # check day of the week
     now = datetime.datetime.now()
-    days_remaining = (day_to_wake_up-datetime.datetime.today().weekday()-1)%7+1
-    wake_up_at = datetime.datetime(now.year, now.month, now.day, 20, 0, 0)
-    time_to_sleep = datetime.timedelta(days_remaining)
-    wake_up_at = wake_up_at + time_to_sleep
-    time.sleep((wake_up_at-now).total_seconds())
+    while time_to_wake_up < now:
+        time_to_wake_up = time_to_wake_up + datetime.timedelta(7)
+
+    time.sleep((time_to_wake_up-now).total_seconds())
+    print("go to sleep for: " + str((time_to_wake_up-now).total_seconds()) +" seconds")
     correct = parse_website()
 
     if telegramBot != 0:
