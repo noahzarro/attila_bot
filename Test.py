@@ -103,9 +103,9 @@ updater.start_polling()
 
 time.sleep(5)
 
-# wake it up every day_to_wake_up at 20:00
+# wake it up at time_to_wake_up, every week
 
-time_to_wake_up = datetime.datetime(2018, 12, 6, 20, 0, 0)  # thursday
+time_to_wake_up = datetime.datetime(2018, 12, 6, 19, 0, 0)  # thursday, GMT
 
 while 1:
 
