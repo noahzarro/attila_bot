@@ -213,7 +213,7 @@ def reminder(weekday):
 
 
 def insult():
-    return "Vollasichlotz"
+    return ""#"Vollasichlotz"
 
 
 def get_level(id):
@@ -280,7 +280,8 @@ def answer_handler(bot, update):
     data = next_message[update.message.chat_id]
 
     command = data.split(" ")[0]
-    arg = data.split(" ")[1]
+    if len(data.split(" ")) > 1:
+        arg = data.split(" ")[1]
 
     print(command)
 
@@ -297,9 +298,7 @@ def answer_handler(bot, update):
             bot.send_message(chat_id=update.message.chat_id, text="Was für ein hässlicher Name! " + insult() + "!")
 
     elif command == "Attribut":
-        print("gatter")
         set_activity_element(get_level(update.message.chat_id), arg, update.message.text)
-        print("gitter")
         # issue new request
         if len(to_change[update.message.chat_id]) > 0:
             attribute = to_change[update.message.chat_id].pop(0)
