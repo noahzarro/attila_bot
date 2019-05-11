@@ -1,6 +1,7 @@
 import requests
 import datetime
 import time
+import random
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Updater, CommandHandler, CallbackQueryHandler, MessageHandler, Filters
 import logging
@@ -257,11 +258,13 @@ def reminder(weekday):
         print(person["ID"], " ", person[weekday])
         if person[weekday] == "Ja":
             if ok[person["level"]] == "nope":
-                updater.bot.send_message(chat_id=person["ID"], text="Reminder")
+                updater.bot.send_message(chat_id=person["ID"], text="Reminder, die Webseite ist noch nicht aktuell, du " + insult())
 
 
 def insult():
-    return "Vollasichlotz"
+    with open("insults.json", "r") as read_file:
+        insults = json.load(read_file)
+    return random.choice(insults)
 
 
 def get_level(id):
@@ -301,7 +304,7 @@ def current(bot, update):
     if level is not None:
         bot.send_message(chat_id=update.message.chat_id, text=get_activity(level), parse_mode="HTML")
     else:
-        bot.send_message(chat_id=update.message.chat_id, text="Zerst mit \start registriere, " + insult())
+        bot.send_message(chat_id=update.message.chat_id, text="Zerst mit \start registriere, du " + insult())
 
 
 def current_with_id(bot, id):
@@ -309,7 +312,7 @@ def current_with_id(bot, id):
     if level is not None:
         bot.send_message(chat_id=id, text=get_activity(level), parse_mode="HTML")
     else:
-        bot.send_message(chat_id=id, text="Zerst mit \start registriere, " + insult())
+        bot.send_message(chat_id=id, text="Zerst mit \start registriere, du " + insult())
 
 
 def change_activity(bot, update):
@@ -328,7 +331,7 @@ def change_activity(bot, update):
 
 def answer_handler(bot, update):
     if not update.message.chat_id in next_message:
-        bot.send_message(chat_id=update.message.chat_id, text="Verstandi nöd, " + insult())
+        bot.send_message(chat_id=update.message.chat_id, text="Verstandi nöd, du " + insult())
         return
 
     # get type of next expected answer
@@ -349,7 +352,7 @@ def answer_handler(bot, update):
         if update.message.text == "Noah" or update.message.text == "Calmo":
             bot.send_message(chat_id=update.message.chat_id, text="Das ist denn ein schöner Name, Gratulation!")
         else:
-            bot.send_message(chat_id=update.message.chat_id, text="Was für ein hässlicher Name! " + insult() + "!")
+            bot.send_message(chat_id=update.message.chat_id, text="Was für ein hässlicher Name! Du " + insult() + "!")
 
     elif command == "Attribut":
         set_activity_element(get_level(update.message.chat_id), arg, update.message.text)
@@ -371,7 +374,7 @@ def answer_handler(bot, update):
         send_to_server()
 
     else:
-        bot.send_message(chat_id=update.message.chat_id, text="Verstandi nöd " + insult() + ", benutz en Command")
+        bot.send_message(chat_id=update.message.chat_id, text="Verstandi nöd du " + insult() + ", benutz en Command")
 
 
 def reset(gitter):
@@ -416,7 +419,7 @@ updater.start_polling()
 
 
 reminder_Mo = events.TimedEvent(0, 10, 0, reminder, "Mo")
-reminder_Do = events.TimedEvent(1, 17, 15, reminder, "Do")
+reminder_Do = events.TimedEvent(3, 20, 0, reminder, "Do")
 reminder_Fr = events.TimedEvent(4, 17, 0, reminder, "Fr")
 reminder_Sa = events.TimedEvent(5, 11, 0, reminder, "Sa")
 reset_Sa = events.TimedEvent(5, 18, 0, reset, "Sa")
