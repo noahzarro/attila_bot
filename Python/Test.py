@@ -425,9 +425,9 @@ print("bot started")
 reset("lehm")
 
 while True:
-    reset_Sa.wait()
     reminder_Mo.wait()
     reminder_Do.wait()
     reminder_Fr.wait()
     reminder_Sa.wait()
+    reset_Sa.wait()
 
