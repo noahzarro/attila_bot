@@ -21,3 +21,10 @@ class TimedEvent:
         self.callback(self.arg)
 
 
+def get_next_saturday():
+    now = datetime.datetime.today()
+    base_monday = now - datetime.timedelta(days=now.weekday(), hours=now.hour, minutes=now.minute, seconds=now.second, microseconds=now.microsecond)
+    next_saturday = base_monday + datetime.timedelta(days=5)
+    if now.weekday() == 5:
+        next_saturday += datetime.timedelta(days=7)
+    return str(next_saturday.day) + "." + str(next_saturday.month) + "." + str(next_saturday.year)
