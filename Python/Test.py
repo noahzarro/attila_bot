@@ -400,7 +400,7 @@ def change_state(bot, update):
 
 def jeeo(bot, update):
     bot.send_photo(chat_id=update.message.chat_id, photo=open('media/jeeo.png', 'rb'))
-    bot.send_audio(chat_id=update.message.chat_id, audio=open('media/jeeo.mp3', 'rb'))
+    bot.send_audio(chat_id=update.message.chat_id, audio=open('media/jeeo.mp3', 'rb'), performer="Hood", title="Jeeo")
 
 
 
