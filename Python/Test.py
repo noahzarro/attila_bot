@@ -398,6 +398,11 @@ def change_state(bot, update):
     bot.send_message(chat_id=update.message.chat_id, text="Status: " + status + ". Ändern?", reply_markup=InlineKeyboardMarkup(keyboard))
 
 
+def jeeo(bot, update):
+    bot.send_picture(chat_id=update.message.chat_id, photo=open('media/jeeo.png', 'rb'))
+    bot.send_audio(chat_id=update.message.chat_id, audio=open('media/jeeo.mp3', 'rb'))
+
+
 
 # register commands
 dispatcher.add_handler(CommandHandler('start', start))
@@ -406,6 +411,7 @@ dispatcher.add_handler(CommandHandler('info', info))
 dispatcher.add_handler(CommandHandler('current', current))
 dispatcher.add_handler(CommandHandler('change', change_activity))
 dispatcher.add_handler(CommandHandler('set_state', change_state))
+dispatcher.add_handler(CommandHandler('jeeo', jeeo))
 
 
 # register inline query handler
